@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.Assignment;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.AssignmentRepository;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.CourseRepository;
+import fi.haagahelia.wesleymoses.homeworktracker.domain.Course;
+import fi.haagahelia.wesleymoses.homeworktracker.domain.CourseRepository;
 
 @Controller
 public class HomeworkController {
@@ -55,14 +57,28 @@ public class HomeworkController {
     	model.addAttribute("assignment", new Assignment());
     	model.addAttribute("courses", crepository.findAll());
         return "addassignment";
-    }     
+    }
+
+    // Add new Course
+    @RequestMapping(value = "/addcourse")
+    public  String addCourse(Model model){
+	    model.addAttribute("course", new Course());
+	    return "addcourse";
+    }
     
     // Save new assignment
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Assignment assignment){
         repository.save(assignment);
         return "redirect:assignmentlist";
-    }    
+    }
+
+    // Save new course
+    @RequestMapping(value = "/savecourse", method = RequestMethod.POST)
+    public String saveCourse(Course course) {
+	    crepository.save(course);
+	    return "redirect:assignmentlist";
+    }
 
     // Delete assignment
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
