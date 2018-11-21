@@ -36,6 +36,7 @@ public class HomeworkController {
     @RequestMapping(value="/assignmentlist")
     public String assignmentList(Model model) {	
         model.addAttribute("assignments", repository.findAll());
+        model.addAttribute("course", new Course());
         return "assignmentlist";
     }
   
