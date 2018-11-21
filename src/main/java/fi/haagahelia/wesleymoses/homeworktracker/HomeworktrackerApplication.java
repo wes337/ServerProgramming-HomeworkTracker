@@ -38,6 +38,7 @@ public class HomeworktrackerApplication {
 			arepository.save(new Assignment("Test Assignment", "2020-10-30", "A test assignment.", crepository.findByName("IT").get(0), false));
 			arepository.save(new Assignment("Test Assignment", "2018-10-30", "A test assignment.", crepository.findByName("Law").get(0), false));
 			arepository.save(new Assignment("Test Assignment", "2015-10-30", "A test assignment.", crepository.findByName("Business").get(0), false));
+            arepository.save(new Assignment("Some Project", "2016-08-30", "Some project that was due a long time ago.", crepository.findByName("Communications").get(0), false));
 
 			log.info("fetch all assignments");
 			for (Assignment assignment : arepository.findAll()) {
