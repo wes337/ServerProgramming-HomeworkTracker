@@ -15,7 +15,6 @@ import fi.haagahelia.wesleymoses.homeworktracker.domain.Assignment;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.AssignmentRepository;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.CourseRepository;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.Course;
-import fi.haagahelia.wesleymoses.homeworktracker.domain.CourseRepository;
 
 @Controller
 public class HomeworkController {
@@ -35,10 +34,19 @@ public class HomeworkController {
 	// Show all assignments
     @RequestMapping(value="/assignmentlist")
     public String assignmentList(Model model) {	
-        model.addAttribute("assignments", repository.findAll());
+        model.addAttribute("assignments", repository.findByCompletedFalse());
         model.addAttribute("courses", crepository.findAll());
         model.addAttribute("course", new Course());
         return "assignmentlist";
+    }
+
+    // Show all completed assignments
+    @RequestMapping(value="/completedassignments")
+    public String completedAssignmentList(Model model) {
+        model.addAttribute("assignments", repository.findByCompletedTrue());
+        model.addAttribute("courses", crepository.findAll());
+        model.addAttribute("course", new Course());
+        return "completedassignments";
     }
   
 	// RESTful service to get all assignments
@@ -87,7 +95,15 @@ public class HomeworkController {
     public String deleteAssignment(@PathVariable("id") Long assignmentId, Model model) {
     	repository.deleteById(assignmentId);
         return "redirect:../assignmentlist";
-    }  
+    }
+
+    // Edit Assignment
+    @RequestMapping(value = "/edit/{id}")
+    public String addAssignment(@PathVariable("id") Long assignmentId, Model model) {
+        model.addAttribute("assignment", repository.findById(assignmentId));
+        model.addAttribute("courses", crepository.findAll());
+        return "editassignment";
+    }
 
 }
 	

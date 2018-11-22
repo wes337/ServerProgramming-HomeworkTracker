@@ -20,7 +20,7 @@ public class Assignment {
     private String assignmentName;
     private String dueDate;
     private String description;
-    private Boolean completed;
+    private Boolean completed = false;
     
     @ManyToOne
     @JsonIgnore

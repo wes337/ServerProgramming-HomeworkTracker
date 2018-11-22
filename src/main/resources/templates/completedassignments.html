@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Assignments</title>
+    <title>Completed Assignments</title>
     <link th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css"  rel="stylesheet" />
     <link th:href="@{/css/custom.css}" href="/css/custom.css"  rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -12,21 +12,19 @@
 <body>
 <div class="flex-fix">
     <div class="d-flex flex-column">
-        <h1 class="mx-auto my-2" style="font-size: 3rem; font-weight: 300;">Assignments</h1>
+        <h1 class="mx-auto my-2" style="font-size: 3rem; font-weight: 300;">Completed Assignments</h1>
         <div class="mx-auto my-2">
-            <a class="btn btn-primary" href="/add">Add Assignment</a>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addCourseModal">Add Course</button>
+            <a class="btn btn-primary" href="/assignmentlist">Go Back</a>
         </div>
     </div>
     <hr class="w-50" />
     <div class="d-flex flex-wrap justify-content-center mx-auto w-75">
         <div th:each="assignment : ${assignments}" class="card shadow-sm m-2" style="width: 18rem;">
-            <div class="card-body">
+            <div class="card-body bg-light">
                 <!-- Delete button trigger modal -->
                 <button type="button" class="btn btn-danger btn-circle float-right" data-toggle="modal" th:attr="data-target='#deleteModal'+${assignment.id}">
                     <i class="fas fa-times"></i>
                 </button>
-                
                 <!-- Confirm Delete Modal -->
                 <div class="modal fade" th:attr="id='deleteModal'+${assignment.id}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -42,7 +40,7 @@
                             </div>
                             <div class="modal-footer">
                                 <a class="btn btn-danger" th:attr="id='/delete/'+${assignment.id}" th:href="@{/delete/{id}(id=${assignment.id})}">Delete</a>
-                              <!--  <a class="btn btn-danger" th:href="@{/delete/{id}(id=${assignment.id})}">Delete</a> -->
+                                <!--  <a class="btn btn-danger" th:href="@{/delete/{id}(id=${assignment.id})}">Delete</a> -->
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -52,7 +50,7 @@
                 <h5 th:text="${assignment.assignmentName}" class="card-title"></h5>
                 <h6 th:text="${assignment.course.name}" class="card-subtitle mb-2 text-muted"></h6>
                 <p th:text="${assignment.description}" class="card-text"></p>
-                <a href="#" class="btn btn-success btn-sm btn-block card-link"><i class="fas fa-check-square"></i> Mark as Complete</a><br/>
+                <a href="#" class="btn btn-danger btn-sm btn-block card-link"><i class="fas fa-check-square"></i> Mark as Incomplete</a><br/>
                 <a class="btn btn-secondary btn-sm btn-block card-link" th:href="@{/edit/{id}(id=${assignment.id})}"><i class="fas fa-edit"></i> Edit</a>
             </div>
             <div class="card-footer text-muted">Due <span th:text="${assignment.dueDate}"></span></div>
@@ -67,37 +65,6 @@
             <select id="inputCourseSelect" th:field="*{course}" class="custom-select" aria-label="Filter by Course">
                 <option th:each="course: ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
             </select>
-        </div>
-        <div class="m-2">
-            <button class="btn btn btn-outline-dark">Show Assignments Due Soon</button>
-        </div>
-        <div class="m-2">
-            <a href="/completedassignments" class="btn btn btn-outline-success">Show Completed Assignments</a>
-        </div>
-    </div>
-    
-    <!-- Add Course Modal -->
-    <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="addCourseModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addCourseModalLabel">Add Course</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form th:object="${course}" th:action="@{savecourse}" action="#" method="post">
-                    <div class="modal-body">
-                        <label for="cname" class="text-muted">Course Name</label>
-                        <input type="text" id="cname" th:field="*{name}" class="form-control" required />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input class="btn btn-primary" type="submit" value="Save"></input>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 </div>
