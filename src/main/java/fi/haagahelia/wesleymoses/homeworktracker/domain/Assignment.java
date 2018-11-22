@@ -82,8 +82,6 @@ public class Assignment {
 		return completed;
 	}
 
-	public void setCompleted(Boolean completed) {
-		this.completed = completed;
-	}
+	public void setCompleted(Boolean completed) { this.completed = completed; }
 
 }

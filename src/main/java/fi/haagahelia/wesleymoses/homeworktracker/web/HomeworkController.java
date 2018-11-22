@@ -97,6 +97,15 @@ public class HomeworkController {
         return "redirect:../assignmentlist";
     }
 
+    // Mark assignment as complete
+    @RequestMapping(value = "/markasdone/{id}", method = RequestMethod.GET)
+    public String doneAssignment(@PathVariable("id") Long assignmentId, Model model) {
+        Assignment a = repository.findById(assignmentId).get();
+        a.setCompleted(true);
+        repository.save(a);
+        return "redirect:../assignmentlist";
+    }
+
     // Edit Assignment
     @RequestMapping(value = "/edit/{id}")
     public String addAssignment(@PathVariable("id") Long assignmentId, Model model) {

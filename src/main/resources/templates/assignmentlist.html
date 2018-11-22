@@ -52,7 +52,7 @@
                 <h5 th:text="${assignment.assignmentName}" class="card-title"></h5>
                 <h6 th:text="${assignment.course.name}" class="card-subtitle mb-2 text-muted"></h6>
                 <p th:text="${assignment.description}" class="card-text"></p>
-                <a href="#" class="btn btn-success btn-sm btn-block card-link"><i class="fas fa-check-square"></i> Mark as Complete</a><br/>
+                <a class="btn btn-success btn-sm btn-block card-link" th:href="@{/markasdone/{id}(id=${assignment.id})}" ><i class="fas fa-check-square"></i> Mark as Complete</a><br/>
                 <a class="btn btn-secondary btn-sm btn-block card-link" th:href="@{/edit/{id}(id=${assignment.id})}"><i class="fas fa-edit"></i> Edit</a>
             </div>
             <div class="card-footer text-muted">Due <span th:text="${assignment.dueDate}"></span></div>
