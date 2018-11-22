@@ -101,9 +101,19 @@ public class HomeworkController {
     @RequestMapping(value = "/markasdone/{id}", method = RequestMethod.GET)
     public String doneAssignment(@PathVariable("id") Long assignmentId, Model model) {
         Assignment a = repository.findById(assignmentId).get();
+        a.giveCompletedDate();
         a.setCompleted(true);
         repository.save(a);
         return "redirect:../assignmentlist";
+    }
+
+    // Mark assignment as incomplete
+    @RequestMapping(value = "/incomplete/{id}", method = RequestMethod.GET)
+    public String incompleteAssignment(@PathVariable("id") Long assignmentId, Model model) {
+        Assignment a = repository.findById(assignmentId).get();
+        a.setCompleted(false);
+        repository.save(a);
+        return "redirect:../completedassignments";
     }
 
     // Edit Assignment

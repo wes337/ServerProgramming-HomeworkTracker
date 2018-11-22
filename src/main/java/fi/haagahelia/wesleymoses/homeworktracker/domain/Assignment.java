@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.*;
+import java.text.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,6 +23,7 @@ public class Assignment {
     private String dueDate;
     private String description;
     private Boolean completed = false;
+    private String completedDate;
     
     @ManyToOne
     @JsonIgnore
@@ -29,13 +32,14 @@ public class Assignment {
     
     public Assignment() {}
 
-	public Assignment(String assignmentName, String dueDate, String description, Course course, Boolean completed) {
+	public Assignment(String assignmentName, String dueDate, String description, Course course, Boolean completed, String completedDate) {
 		super();
 		this.assignmentName = assignmentName;
 		this.dueDate = dueDate;
 		this.description = description;
 		this.course = course;
 		this.completed = completed;
+		this.completedDate = completedDate;
 	}
 
 	public Long getId() {
@@ -83,5 +87,15 @@ public class Assignment {
 	}
 
 	public void setCompleted(Boolean completed) { this.completed = completed; }
+
+	public String getCompletedDate() { return completedDate; }
+
+	public void setCompletedDate(String completedDate) { this.completedDate = completedDate; }
+
+	public void giveCompletedDate() {
+    	Date compdate = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+    	setCompletedDate(ft.format(compdate));
+	}
 
 }
