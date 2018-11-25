@@ -115,8 +115,19 @@ public class HomeworkController {
     public String filterCourse(@RequestParam("courseid") @PathVariable("id") Long courseId, Model model) {
         model.addAttribute("courses", crepository.findAll());
         model.addAttribute("course", new Course());
-        model.addAttribute("assignments", repository.findByCourse(crepository.findById(courseId).get()));
+        model.addAttribute("assignments", repository.findByCourseAndCompletedFalse(crepository.findById(courseId).get()));
+        model.addAttribute("thiscourse", crepository.findById(courseId).get());
         return "filteredlist";
+    }
+
+    // Show all filtered completed assignments (POST)
+    @RequestMapping(value="/filter/completedassignments", method = RequestMethod.POST)
+    public String filteredcompletedAssignmentListPost(@RequestParam("courseid") @PathVariable("id") Long courseId, Model model) {
+        model.addAttribute("assignments", repository.findByCourseAndCompletedTrue(crepository.findById(courseId).get()));
+        model.addAttribute("courses", crepository.findAll());
+        model.addAttribute("course", new Course());
+        model.addAttribute("thiscourse", crepository.findById(courseId).get());
+        return "filteredcompletedassignments";
     }
 
     // Show all filtered completed assignments
@@ -125,6 +136,7 @@ public class HomeworkController {
         model.addAttribute("assignments", repository.findByCourseAndCompletedTrue(crepository.findById(courseId).get()));
         model.addAttribute("courses", crepository.findAll());
         model.addAttribute("course", new Course());
+        model.addAttribute("thiscourse", crepository.findById(courseId).get());
         return "filteredcompletedassignments";
     }
 

@@ -20,6 +20,9 @@
     </div>
     <hr class="w-50" />
     <div class="d-flex flex-wrap justify-content-center mx-auto w-75">
+        <div th:if="${#lists.isEmpty(assignments)}">
+            <p class="lead">You have no assignments.</p>
+        </div>
         <div th:each="assignment : ${assignments}" class="card shadow-sm m-2" style="width: 18rem;">
             <div class="card-body">
                 <!-- Delete button trigger modal -->

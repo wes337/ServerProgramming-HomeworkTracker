@@ -12,6 +12,7 @@
 <body>
 <div class="flex-fix">
     <div class="d-flex flex-column">
+        <h2 class="mx-auto" th:text="*{thiscourse.name}"></h2>
         <h1 class="mx-auto my-2" style="font-size: 3rem; font-weight: 300;">Completed Assignments</h1>
         <div class="mx-auto my-2">
             <a class="btn btn-primary" href="#" onclick="history.go(-1)">Go Back</a>
@@ -19,6 +20,9 @@
     </div>
     <hr class="w-50" />
     <div class="d-flex flex-wrap justify-content-center mx-auto w-75">
+        <div th:if="${#lists.isEmpty(assignments)}">
+            <p class="lead">You have no completed assignments.</p>
+        </div>
         <div th:each="assignment : ${assignments}" class="card shadow-sm m-2" style="width: 18rem;">
             <div class="card-body bg-light">
                 <!-- Delete button trigger modal -->
@@ -59,12 +63,16 @@
     <hr class="w-50" />
     <div class="d-flex flex-wrap justify-content-center bg-light border">
         <div class="input-group m-2 w-auto">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary" type="button">Filter by Course</button>
-            </div>
-            <select id="inputCourseSelect" th:field="*{course}" class="custom-select" aria-label="Filter by Course">
-                <option th:each="course: ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
-            </select>
+            <form th:action="@{/filter/completedassignments/}" method="post">
+                <div class="input-group m-2 w-auto">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="submit">Filter by Course</button>
+                    </div>
+                    <select  th:field="${course.courseid}" id="inputCourseSelect" class="custom-select" aria-label="Filter by Course">
+                        <option th:each="course : ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
+                    </select>
+                </div>
+            </form>
         </div>
     </div>
 </div>
