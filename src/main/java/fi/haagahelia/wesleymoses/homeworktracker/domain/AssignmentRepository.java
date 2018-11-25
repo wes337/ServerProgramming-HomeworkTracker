@@ -11,5 +11,6 @@ public interface AssignmentRepository extends CrudRepository<Assignment, Long> {
     List<Assignment> findByCompletedTrue();
     List<Assignment> findByCompletedFalse();
     List<Assignment> findByCourse(Course course);
+    List<Assignment> findByCourseAndCompletedTrue(Course course);
     
 }

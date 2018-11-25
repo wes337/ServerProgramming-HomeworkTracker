@@ -27,7 +27,16 @@ public class HomeworkController {
 	public String home() {
 		return "index";
 	}
-	
+
+    // Show all assignments
+    @RequestMapping(value="/")
+    public String indexList(Model model) {
+        model.addAttribute("assignments", repository.findByCompletedFalse());
+        model.addAttribute("courses", crepository.findAll());
+        model.addAttribute("course", new Course());
+        return "assignmentlist";
+    }
+
 	// Show all assignments
     @RequestMapping(value="/assignmentlist")
     public String assignmentList(Model model) {	
@@ -110,15 +119,13 @@ public class HomeworkController {
         return "filteredlist";
     }
 
-    // Filter by Course GET
-    @RequestMapping(value = "/filter/{id}", method = RequestMethod.GET)
-    public String filterCourseGet(@PathVariable("id") Long courseId, Model model) {
+    // Show all filtered completed assignments
+    @RequestMapping(value="/filter/completedassignments/{id}", method = RequestMethod.GET)
+    public String filteredcompletedAssignmentList(@PathVariable("id") Long courseId, Model model) {
+        model.addAttribute("assignments", repository.findByCourseAndCompletedTrue(crepository.findById(courseId).get()));
         model.addAttribute("courses", crepository.findAll());
         model.addAttribute("course", new Course());
-        model.addAttribute("assignments", repository.findByCourse(crepository.findById(courseId).get()));
-
-        model.addAttribute("thiscourse", crepository.findById(courseId).get());
-        return "filteredlist";
+        return "filteredcompletedassignments";
     }
 
     // Mark assignment as complete
