@@ -62,12 +62,16 @@
     <hr class="w-50" />
     <div class="d-flex flex-wrap justify-content-center bg-light border">
         <div class="input-group m-2 w-auto">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary" type="button">Filter by Course</button>
-            </div>
-            <select id="inputCourseSelect" th:field="*{course}" class="custom-select" aria-label="Filter by Course">
-                <option th:each="course: ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
-            </select>
+            <form th:action="@{/filter/completedassignments/}" method="post">
+                <div class="input-group m-2 w-auto">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="submit">Filter by Course</button>
+                    </div>
+                    <select  th:field="${course.courseid}" id="inputCourseSelect" class="custom-select" aria-label="Filter by Course">
+                        <option th:each="course : ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
+                    </select>
+                </div>
+            </form>
         </div>
     </div>
 </div>
