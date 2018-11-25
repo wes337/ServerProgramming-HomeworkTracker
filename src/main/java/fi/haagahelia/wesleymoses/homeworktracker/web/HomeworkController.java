@@ -6,10 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import fi.haagahelia.wesleymoses.homeworktracker.domain.Assignment;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.AssignmentRepository;
@@ -95,6 +92,33 @@ public class HomeworkController {
     public String deleteAssignment(@PathVariable("id") Long assignmentId, Model model) {
     	repository.deleteById(assignmentId);
         return "redirect:../assignmentlist";
+    }
+
+    // Delete course
+    @RequestMapping(value = "/deletecourse", method = RequestMethod.POST)
+    public String deleteCourse(@RequestParam("courseid") @PathVariable("id") Long courseId, Model model) {
+        crepository.deleteById(courseId);
+        return "redirect:../assignmentlist";
+    }
+
+    // Filter by Course
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    public String filterCourse(@RequestParam("courseid") @PathVariable("id") Long courseId, Model model) {
+        model.addAttribute("courses", crepository.findAll());
+        model.addAttribute("course", new Course());
+        model.addAttribute("assignments", repository.findByCourse(crepository.findById(courseId).get()));
+        return "filteredlist";
+    }
+
+    // Filter by Course GET
+    @RequestMapping(value = "/filter/{id}", method = RequestMethod.GET)
+    public String filterCourseGet(@PathVariable("id") Long courseId, Model model) {
+        model.addAttribute("courses", crepository.findAll());
+        model.addAttribute("course", new Course());
+        model.addAttribute("assignments", repository.findByCourse(crepository.findById(courseId).get()));
+
+        model.addAttribute("thiscourse", crepository.findById(courseId).get());
+        return "filteredlist";
     }
 
     // Mark assignment as complete

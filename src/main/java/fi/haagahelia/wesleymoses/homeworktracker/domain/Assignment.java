@@ -1,11 +1,6 @@
 package fi.haagahelia.wesleymoses.homeworktracker.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.*;
 import java.text.*;
 
@@ -29,7 +24,7 @@ public class Assignment {
     @JsonIgnore
     @JoinColumn(name = "courseid")
     private Course course;
-    
+
     public Assignment() {}
 
 	public Assignment(String assignmentName, String dueDate, String description, Course course, Boolean completed, String completedDate) {

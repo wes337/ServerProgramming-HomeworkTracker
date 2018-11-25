@@ -12,6 +12,7 @@
 <body>
 <div class="flex-fix">
     <div class="d-flex flex-column">
+        <h2 class="mx-auto" th:text="*{assignments[0].course.name}"></h2>
         <h1 class="mx-auto my-2" style="font-size: 3rem; font-weight: 300;">Assignments</h1>
         <div class="mx-auto my-2">
             <a class="btn btn-primary" href="/add">Add Assignment</a>
@@ -26,7 +27,7 @@
                 <button type="button" class="btn btn-danger btn-circle float-right" data-toggle="modal" th:attr="data-target='#deleteModal'+${assignment.id}">
                     <i class="fas fa-times"></i>
                 </button>
-                
+
                 <!-- Confirm Delete Modal -->
                 <div class="modal fade" th:attr="id='deleteModal'+${assignment.id}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -60,14 +61,14 @@
     <hr class="w-50" />
     <div class="d-flex flex-wrap justify-content-center bg-light border">
         <form th:action="@{/filter/}" method="post">
-        <div class="input-group m-2 w-auto">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary" type="submit">Filter by Course</button>
+            <div class="input-group m-2 w-auto">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="submit">Filter by Course</button>
+                </div>
+                <select  th:field="${course.courseid}" id="inputCourseSelect" class="custom-select" aria-label="Filter by Course">
+                    <option th:each="course : ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
+                </select>
             </div>
-            <select  th:field="${course.courseid}" id="inputCourseSelect" class="custom-select" aria-label="Filter by Course">
-                <option th:each="course : ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
-            </select>
-        </div>
         </form>
         <div class="m-2">
             <button class="btn btn btn-outline-dark">Show Assignments Due Soon</button>
@@ -76,7 +77,7 @@
             <a href="/completedassignments" class="btn btn btn-outline-success">Show Completed Assignments</a>
         </div>
     </div>
-    
+
     <!-- Courses Modal -->
     <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="addCourseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -87,27 +88,27 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                    <form th:object="${course}" th:action="@{savecourse}" action="#" method="post">
-                        <div class="modal-body">
-                            <label for="cname" class="text-muted">Course Name</label>
-                            <input type="text" id="cname" th:field="*{name}" class="form-control" required />
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input class="btn btn-primary" type="submit" value="Save"></input>
-                        </div>
-                    </form>
-                    <div class="mx-auto p-2">
-                        <hr />
-                        <form class="form-inline" th:action="@{/deletecourse/}" method="post">
-                            <div class="input-group mx-2 mb-2">
-                                <select class="form-control" th:field="${course.courseid}">
-                                    <option th:each="course : ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
-                                </select>
-                            </div>
-                            <button class="btn btn-danger mb-2 mx-2 " type="submit">Delete Course</button>
-                        </form>
+                <form th:object="${course}" th:action="@{savecourse}" action="#" method="post">
+                    <div class="modal-body">
+                        <label for="cname" class="text-muted">Course Name</label>
+                        <input type="text" id="cname" th:field="*{name}" class="form-control" required />
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input class="btn btn-primary" type="submit" value="Save"></input>
+                    </div>
+                </form>
+                <div class="mx-auto p-2">
+                    <hr />
+                    <form class="form-inline" th:action="@{/deletecourse/}" method="post">
+                        <div class="input-group mx-2 mb-2">
+                            <select class="form-control" th:field="${course.courseid}">
+                                <option th:each="course : ${courses}" th:value="${course.courseid}" th:text="${course.name}"></option>
+                            </select>
+                        </div>
+                        <button class="btn btn-danger mb-2 mx-2 " type="submit">Delete Course</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
