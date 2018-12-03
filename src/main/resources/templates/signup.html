@@ -10,23 +10,26 @@
     <link th:href="@{/css/normalize.css}" href="/css/normalize.css"  rel="stylesheet" />
 </head>
 <body>
-	<div class="container m-3">
+	<div class="container text-center m-3">
+	<h1 class="mb-0" style="font-size: 3rem; font-weight: 300;">Sign Up</h1>
+	<hr />
+	<div class="p-3 bg-light border rounded">
 		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
-			<div>
+			<div class="form-group">
 				<label> Username :<input type="text" th:field="*{username}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
 			</div>
-			<div>
+			<div class="form-group">
 				<label> Password :<input type="password" th:field="*{password}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
 			</div>
-			<div>
+			<div class="form-group">
 				<label> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
 			</div>
-			
 			<input type="submit" class="btn btn-success" value="Signup"></input>		
 		</form>
+	</div>
 	</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

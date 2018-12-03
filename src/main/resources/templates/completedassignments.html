@@ -11,13 +11,13 @@
 </head>
 <body>
 <div class="flex-fix">
-<nav class="navbar sticky-top navbar-light bg-light py-0 my-0">
+<nav class="navbar fixed-top navbar-light bg-light py-0 my-0">
 	<p class="navbar-brand">[[${#httpServletRequest.remoteUser}]]</p>
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Sign Out" class="btn btn-danger btn-sm"/>
 	</form>
 </nav>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column mt-3">
         <h1 class="mx-auto my-2" style="font-size: 3rem; font-weight: 300;">Completed Assignments</h1>
         <div class="mx-auto my-2">
             <a class="btn btn-primary" href="/assignmentlist">Go Back</a>

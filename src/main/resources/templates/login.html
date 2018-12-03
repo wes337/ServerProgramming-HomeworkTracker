@@ -10,20 +10,31 @@
     <link th:href="@{/css/normalize.css}" href="/css/normalize.css"  rel="stylesheet" />
 </head>
 <body>
-<div class="container m-3">
-	<div class="alert alert-danger" th:if="${param.error}">
-    Invalid username and password.
-    </div>
-    <div class="alert alert-warning" th:if="${param.logout}">
-    You have been logged out.
-    </div>
-    <form th:action="@{/login}" method="post">
+<div class="container mx-auto text-center">
+<h1 class="mb-0" style="font-size: 3rem; font-weight: 300;">Homework Tracker</h1>
+<hr />
+    <form class="px-2 pt-3 bg-light border rounded" th:action="@{/login}" method="post">
 	    <div class="form-group"><label> User Name : <input type="text" name="username" class="form-control"/> </label></div>
 	    <div class="form-group"><label> Password: <input type="password" name="password" class="form-control"/> </label></div>
 	    <div class="form-group"><input type="submit" value="Sign In" class="btn btn-success"/></div>
-	    </form>
-	    <a class="btn btn-primary" th:href="@{/signup}">Sign-up</a>
+    </form>
+	    <a class="btn btn-primary m-5" th:href="@{/signup}">Sign-up</a>
 </div>
+
+<div th:if="${param.logout}" class="alert alert-warning alert-dismissible fade show text-center w-100" role="alert">
+	You have been logged out.
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show text-center w-100" role="alert">
+	Invalid username and password.
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
