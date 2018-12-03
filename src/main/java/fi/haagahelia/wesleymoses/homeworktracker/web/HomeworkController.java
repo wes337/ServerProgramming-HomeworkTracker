@@ -27,6 +27,13 @@ public class HomeworkController {
 	public String home() {
 		return "index";
 	}
+	
+    // Login
+	@RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+
 
     // Show all assignments
     @RequestMapping(value="/")

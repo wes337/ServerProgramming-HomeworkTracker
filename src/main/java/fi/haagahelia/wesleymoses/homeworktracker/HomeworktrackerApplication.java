@@ -12,6 +12,8 @@ import fi.haagahelia.wesleymoses.homeworktracker.domain.Assignment;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.AssignmentRepository;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.Course;
 import fi.haagahelia.wesleymoses.homeworktracker.domain.CourseRepository;
+import fi.haagahelia.wesleymoses.homeworktracker.domain.User;
+import fi.haagahelia.wesleymoses.homeworktracker.domain.UserRepository;
 
 @SpringBootApplication
 public class HomeworktrackerApplication {
@@ -23,7 +25,7 @@ public class HomeworktrackerApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner studentDemo(AssignmentRepository arepository, CourseRepository crepository) {
+	public CommandLineRunner studentDemo(AssignmentRepository arepository, CourseRepository crepository, UserRepository urepository) {
 		return (args) -> {
 			log.info("Create some test courses");
 			crepository.save(new Course("IT"));
@@ -40,7 +42,13 @@ public class HomeworktrackerApplication {
 			arepository.save(new Assignment("Test Assignment", "2015-10-30", "A test assignment.", crepository.findByName("Business").get(0), false, null));
             arepository.save(new Assignment("Some Project", "2016-08-30", "Some project that was due a long time ago.", crepository.findByName("Communications").get(0), false, null));
 
-			log.info("fetch all assignments");
+            // Create users: admin/admin user/user
+ 			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+ 			User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+ 			urepository.save(user1);
+ 			urepository.save(user2);
+            
+            log.info("fetch all assignments");
 			for (Assignment assignment : arepository.findAll()) {
 				log.info(assignment.toString());
 			}

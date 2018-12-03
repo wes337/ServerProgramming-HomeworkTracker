@@ -10,6 +10,12 @@
     <link th:href="@{/css/normalize.css}" href="/css/normalize.css"  rel="stylesheet" />
 </head>
 <body>
+<nav class="navbar sticky-top navbar-light bg-light py-0 my-0">
+	<p class="navbar-brand">[[${#httpServletRequest.remoteUser}]]</p>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" class="btn btn-danger btn-sm"/>
+	</form>
+</nav>
 <div class="container m-3">
     <h1>Edit Assignment</h1>
     <div>
