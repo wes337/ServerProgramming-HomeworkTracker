@@ -17,10 +17,17 @@ import fi.haagahelia.wesleymoses.homeworktracker.web.UserDetailServiceImpl;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserDetailServiceImpl userDetailsService;	
+    private UserDetailServiceImpl userDetailsService;
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // --------------------------------- //
+        http.authorizeRequests().antMatchers("/").permitAll().and()
+                .authorizeRequests().antMatchers("/console/**").permitAll();
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+        // -------------------------------- //
         http
         .authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when logged out
         .and()

@@ -54,6 +54,15 @@ public class HomeworkController {
         return "assignmentlist";
     }
 
+    // Sort assignments
+    @RequestMapping(value="/sort")
+    public String assignmentListSort(Model model) {
+        model.addAttribute("assignments", repository.findAllByOrderByDueDateDesc());
+        model.addAttribute("courses", crepository.findAll());
+        model.addAttribute("course", new Course());
+        return "assignmentlist";
+    }
+
     // Show all completed assignments
     @RequestMapping(value="/completedassignments")
     public String completedAssignmentList(Model model) {
