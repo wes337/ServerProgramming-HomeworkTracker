@@ -1,5 +1,6 @@
 package fi.haagahelia.wesleymoses.homeworktracker.web;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -151,7 +152,7 @@ public class HomeworkController {
     @RequestMapping(value = "/markasdone/{id}", method = RequestMethod.GET)
     public String doneAssignment(@PathVariable("id") Long assignmentId, Model model) {
         Assignment a = repository.findById(assignmentId).get();
-        a.giveCompletedDate();
+        a.setCompletedDate(LocalDate.now());
         a.setCompleted(true);
         repository.save(a);
         return "redirect:../assignmentlist";

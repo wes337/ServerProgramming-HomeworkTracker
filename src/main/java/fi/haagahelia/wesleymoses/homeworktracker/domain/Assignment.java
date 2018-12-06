@@ -87,15 +87,7 @@ public class Assignment {
 
 	public LocalDate getCompletedDate() { return completedDate; }
 
-	public void setCompletedDate(String completedDate) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    	this.completedDate = LocalDate.parse(completedDate, formatter);;
+	public void setCompletedDate(LocalDate completedDate) {
+		this.completedDate = completedDate;
     }
-
-	public void giveCompletedDate() {
-    	Date compdate = new Date();
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-    	setCompletedDate(ft.format(compdate));
-	}
-
 }
