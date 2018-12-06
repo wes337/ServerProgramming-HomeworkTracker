@@ -20,7 +20,7 @@ public class Assignment {
     private LocalDate dueDate;
     private String description;
     private Boolean completed = false;
-    private String completedDate;
+    private LocalDate completedDate = LocalDate.now();
     
     @ManyToOne
     @JsonIgnore
@@ -29,7 +29,7 @@ public class Assignment {
 
     public Assignment() {}
 
-	public Assignment(String assignmentName, LocalDate dueDate, String description, Course course, Boolean completed, String completedDate) {
+	public Assignment(String assignmentName, LocalDate dueDate, String description, Course course, Boolean completed, LocalDate completedDate) {
 		super();
 		this.assignmentName = assignmentName;
 		this.dueDate = dueDate;
@@ -85,20 +85,17 @@ public class Assignment {
 
 	public void setCompleted(Boolean completed) { this.completed = completed; }
 
-	public String getCompletedDate() { return completedDate; }
+	public LocalDate getCompletedDate() { return completedDate; }
 
-	public void setCompletedDate(String completedDate) { this.completedDate = completedDate; }
+	public void setCompletedDate(String completedDate) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    	this.completedDate = LocalDate.parse(completedDate, formatter);;
+    }
 
 	public void giveCompletedDate() {
     	Date compdate = new Date();
 		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
     	setCompletedDate(ft.format(compdate));
-	}
-
-	public String formatDate() {
-		Date fDate = new Date(this.completedDate);
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-		return ft.format(fDate).toString();
 	}
 
 }

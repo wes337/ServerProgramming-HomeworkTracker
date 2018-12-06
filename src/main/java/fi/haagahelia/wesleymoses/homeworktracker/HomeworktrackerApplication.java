@@ -33,7 +33,7 @@ public class HomeworktrackerApplication {
 			crepository.save(new Course("Law"));
 			crepository.save(new Course("Communications"));
 			
-			arepository.save(new Assignment("IT Project", LocalDate.of(2012,Month.DECEMBER,25), "An IT course project.", crepository.findByName("IT").get(0), true, "2012-12-20"));
+			arepository.save(new Assignment("IT Project", LocalDate.of(2012,Month.DECEMBER,25), "An IT course project.", crepository.findByName("IT").get(0), true, LocalDate.of(2012,Month.DECEMBER,20)));
 			arepository.save(new Assignment("Business Assignment", LocalDate.of(2018,Month.DECEMBER,25), "A business course assignment.", crepository.findByName("Business").get(0), false, null));
 			arepository.save(new Assignment("Communications Paper", LocalDate.of(2019,Month.JULY,20), "A research paper.", crepository.findByName("Communications").get(0), false, null));
 			arepository.save(new Assignment("Law Journal", LocalDate.of(2018,Month.DECEMBER,11), "A law journal.", crepository.findByName("Law").get(0), false, null));

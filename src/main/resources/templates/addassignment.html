@@ -20,7 +20,7 @@
         <form th:object="${assignment}" th:action="@{save}" action="#" method="post">
             <div class="form-group">
                 <input type="hidden" th:field="*{id}" class="form-control" />
-                <input type="hidden" th:field="*{completedDate}" class="form-control" />
+               <!-- <input type="hidden" th:field="*{completedDate}" class="form-control" /> -->
                 <label for="aname">Assignment Name</label>
                 <input class="form-control" type="text" id="aname" th:field="*{assignmentName}" />
             </div>
