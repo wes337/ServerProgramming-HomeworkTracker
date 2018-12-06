@@ -3,6 +3,8 @@ package fi.haagahelia.wesleymoses.homeworktracker.domain;
 import javax.persistence.*;
 import java.util.*;
 import java.text.*;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,7 +17,7 @@ public class Assignment {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String assignmentName;
-    private String dueDate;
+    private LocalDate dueDate;
     private String description;
     private Boolean completed = false;
     private String completedDate;
@@ -27,7 +29,7 @@ public class Assignment {
 
     public Assignment() {}
 
-	public Assignment(String assignmentName, String dueDate, String description, Course course, Boolean completed, String completedDate) {
+	public Assignment(String assignmentName, LocalDate dueDate, String description, Course course, Boolean completed, String completedDate) {
 		super();
 		this.assignmentName = assignmentName;
 		this.dueDate = dueDate;
@@ -53,12 +55,12 @@ public class Assignment {
 		this.assignmentName = assignmentName;
 	}
 
-	public String getDueDate() {
-		return dueDate;
+	public LocalDate getDueDate() { return dueDate;
 	}
 
 	public void setDueDate(String dueDate) {
-		this.dueDate = dueDate;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    	this.dueDate = LocalDate.parse(dueDate, formatter);
 	}
 
 	public String getDescription() {
@@ -91,6 +93,12 @@ public class Assignment {
     	Date compdate = new Date();
 		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
     	setCompletedDate(ft.format(compdate));
+	}
+
+	public String formatDate() {
+		Date fDate = new Date(this.completedDate);
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+		return ft.format(fDate).toString();
 	}
 
 }
