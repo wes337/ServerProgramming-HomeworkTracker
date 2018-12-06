@@ -1,8 +1,6 @@
 package fi.haagahelia.wesleymoses.homeworktracker.domain;
 
 import javax.persistence.*;
-import java.util.*;
-import java.text.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
