@@ -11,12 +11,12 @@
 </head>
 <body>
 <div class="flex-fix">
-<nav class="navbar sticky-top navbar-light bg-light py-0 my-0" style="width: 100vw;">
-	<p class="navbar-brand">[[${#httpServletRequest.remoteUser}]]</p>
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out" class="btn btn-danger btn-sm"/>
-	</form>
-</nav>
+    <nav class="navbar fixed-top navbar-light bg-light py-0 my-0">
+        <p class="navbar-brand">[[${#httpServletRequest.remoteUser}]]</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" class="btn btn-danger btn-sm"/>
+        </form>
+    </nav>
     <div class="d-flex flex-column">
         <h2 class="mx-auto" th:text="*{thiscourse.name}"></h2>
         <h1 class="mx-auto my-2" style="font-size: 3rem; font-weight: 300;">Assignments</h1>
