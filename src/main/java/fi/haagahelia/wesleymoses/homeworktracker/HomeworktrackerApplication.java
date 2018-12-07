@@ -40,7 +40,7 @@ public class HomeworktrackerApplication {
 			arepository.save(new Assignment("Test Assignment", LocalDate.of(2020,Month.OCTOBER,30), "A test assignment.", crepository.findByName("IT").get(0), false, null));
 			arepository.save(new Assignment("Test Assignment", LocalDate.of(2018,Month.OCTOBER,30), "A test assignment.", crepository.findByName("Law").get(0), false, null));
 			arepository.save(new Assignment("Test Assignment", LocalDate.of(2015,Month.OCTOBER,30), "A test assignment.", crepository.findByName("Business").get(0), false, null));
-            arepository.save(new Assignment("Some Project", LocalDate.of(2016,Month.AUGUST,30), "Some project that was due a long time ago.", crepository.findByName("Communications").get(0), false, null));
+            		arepository.save(new Assignment("Some Project", LocalDate.of(2016,Month.AUGUST,30), "Some project that was due a long time ago.", crepository.findByName("Communications").get(0), false, null));
 
             // Create users: admin/admin user/user
  			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
