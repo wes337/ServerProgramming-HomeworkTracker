@@ -58,7 +58,7 @@ public class Assignment {
 
 	public void setDueDate(String dueDate) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    	this.dueDate = LocalDate.parse(dueDate, formatter);
+    		this.dueDate = LocalDate.parse(dueDate, formatter);
 	}
 
 	public String getDescription() {
